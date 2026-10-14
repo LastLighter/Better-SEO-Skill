@@ -574,18 +574,24 @@ def check_footer(html: str, rep: FileReport, verbose: bool) -> None:
         text = re.sub(r"<[^>]+>", " ", am.group(2))
         text = re.sub(r"\{[^{}]*\}", " ", text)
         links.append((am.group(1), re.sub(r"\s+", " ", text).strip()))
-    if len(links) < 5:
-        rep.add("footer-matrix", "WARN",
-                f"Footer 仅 {len(links)} 条链接，建议构建品牌词+功能页+长尾落地页矩阵（6–30 条）",
-                [f"{t} -> {h}" for h, t in links] if verbose else [])
+    if not links:
+        rep.add("footer-matrix", "WARN", "Footer 内无任何 <a> 链接，索引矩阵缺失", [])
         return
-    vague = [t for _, t in links if t.lower() in VAGUE_ANCHORS or len(t) < 2]
+
+    groups = len(re.findall(r"<h[2-6]\b", block, re.I)) + len(re.findall(r"<section\b", block, re.I))
+    vague = [t for _, t in links if (t and t.lower() in VAGUE_ANCHORS) or (t and len(t) < 2)]
+    ev = [f"{t} -> {h}" for h, t in links[:12]] if verbose else []
+
+    # 页脚矩阵可以是「多组标题 + 少量链接」的紧凑导航，因此按分组 OR 条数判定
     if vague:
-        rep.add("footer-matrix", "WARN", f"{len(vague)} 条锚文本无信息量（如「更多/点击这里」）",
+        rep.add("footer-matrix", "WARN", f"{len(vague)}/{len(links)} 条锚文本无信息量（如「更多/点击这里」）",
                 [f'"{t}"' for t in vague[:8]])
+    elif len(links) >= 6 or (len(links) >= 3 and groups >= 2):
+        rep.add("footer-matrix", "PASS",
+                f"Footer 索引矩阵：{len(links)} 条链接 / {groups} 个分组，锚文本均含信息", ev)
     else:
-        rep.add("footer-matrix", "PASS", f"Footer 链接矩阵 {len(links)} 条，锚文本均含信息",
-                [f"{t} -> {h}" for h, t in links[:10]] if verbose else [])
+        rep.add("footer-matrix", "WARN",
+                f"Footer 仅 {len(links)} 条链接且无分组，建议构建品牌词+功能页+长尾落地页矩阵", ev)
 
 
 def check_keyword_stuffing(html: str, rep: FileReport, verbose: bool) -> None:

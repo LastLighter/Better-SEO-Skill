@@ -41,7 +41,7 @@ license: MIT
 - `H3`：二级功能或案例标题。
 
 **结构化数据**：主页与工具页注入 `SoftwareApplication` JSON-LD
-（模板见 [`assets/templates/software-application.jsonld`](assets/templates/software-application.jsonld)）。
+（模板见 [`assets/templates/jsonld/software-application.jsonld`](assets/templates/jsonld/software-application.jsonld)）。
 
 **技术 Hard Rules**
 
@@ -70,7 +70,15 @@ license: MIT
 4. **模式选型**：至少落地第 4 节中的 1 个模式，并说明该长尾词在 UI 上的载体。
 5. **实现**：图片、语义化、Footer 矩阵按 Hard Rules 落地。
 6. **自查**：逐项过 [`reference/05-agent-checklist.md`](reference/05-agent-checklist.md)；
-   有 HTML 产物时运行 `python scripts/seo_audit.py <file-or-dir>` 拿到机器结论。
+   有 HTML / JSX 产物时运行审计脚本拿机器结论：
+
+   ```bash
+   python scripts/seo_audit.py <目标文件或目录> -v     # 每项带证据与行号
+   python scripts/seo_audit.py <目标> --json           # 输出 JSON，便于接 CI
+   ```
+
+   退出码 `0` = 无 FAIL，`1` = 存在 FAIL。脚本已做组件片段（`.tsx/.jsx`）降级，
+   在组件文件上不会因为「没有 Title」而产生假失败。
 7. **交付说明**：在回复中列出「用到的长尾词 → 对应载体（组件/路由/文案）」的映射表。
 
 ## 6. 文件导航
@@ -82,7 +90,7 @@ license: MIT
 | [`reference/04-technical-and-performance.md`](reference/04-technical-and-performance.md) | 性能、语义化、Footer 矩阵、CLS/懒加载细则 |
 | [`reference/05-agent-checklist.md`](reference/05-agent-checklist.md) | 提交前 6 项核验 + 常见反模式 |
 | [`assets/templates/`](assets/templates) | 可直接复制的 JSON-LD 与 JSX/HTML 片段 |
-| [`scripts/seo_audit.py`](scripts/seo_audit.py) | 零依赖 SEO 审计脚本，输出 PASS/WARN/FAIL |
+| [`scripts/seo_audit.py`](scripts/seo_audit.py) | 零依赖 SEO 审计脚本，输出 PASS/WARN/FAIL（支持 `.html/.htm/.jsx/.tsx/.vue/.svelte`） |
 
 ## 7. 红线（任一命中即视为交付不合格）
 

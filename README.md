@@ -113,12 +113,13 @@ reference/
 ├── 04-technical-and-performance.md         ← 图片、懒加载、CLS、语义化、Footer 矩阵、技术项
 └── 05-agent-checklist.md                   ← 交付前 6 项核验 + 常见反模式 + 输出模板
 assets/templates/
-├── software-application.jsonld             ← 工具页结构化数据
-├── organization-website.jsonld             ← 全站 Organization + WebSite(SearchAction)
-├── breadcrumb-list.jsonld                  ← 面包屑（落地页必备）
-├── howto-article.jsonld                    ← 教程 HowTo
 ├── head-and-structure.html                 ← 完整 SEO 页面骨架（可跑过审计的正面样例）
-└── react-components.tsx                    ← React/Next.js 组件模板（4 大模式全覆盖）
+├── react-components.tsx                    ← React/Next.js 组件模板（4 大模式全覆盖）
+└── jsonld/                                 ← 可复制的结构化数据模板
+    ├── software-application.jsonld         ← 工具页SoftwareApplication
+    ├── organization-website.jsonld         ← 全站 Organization + WebSite(SearchAction)
+    ├── breadcrumb-list.jsonld              ← 面包屑（落地页必备）
+    └── howto-article.jsonld                ← 教程 HowTo
 scripts/seo_audit.py                        ← 零依赖审计脚本
 tests/                                      ← 回归测试 + 反面样例
 ```
@@ -233,6 +234,31 @@ python scripts/seo_audit.py ./app --quiet              # 只看汇总
   [WARN] keyword-stuffing   疑似关键词堆砌：生图×32、免费×12
   → 结论：[FAIL] PASS 9 / WARN 4 / FAIL 2 / N/A 0
 ==============================================================================
+```
+
+### 自检（Dogfooding）
+
+本仓库自己的模板就能跑过自己的审计 —— 这是判断脚本是否误报的最快方式：
+
+```bash
+# 扫描仓库内所有页面/组件模板（跳过反面样例与纯 JSON-LD 数据文件）
+python scripts/seo_audit.py . --exclude ",.git,tests,jsonld"
+```
+
+实际输出：
+
+```
+[PASS] assets/templates/head-and-structure.html  (PASS 15 / WARN 0 / FAIL 0 / N/A 0)
+[PASS] assets/templates/react-components.tsx     (PASS 7 / WARN 0 / FAIL 0 / N/A 3)
+总计：2 个文件 | FAIL 0 · WARN 0 · PASS 22 · N/A 3
+整体结论：[PASS]
+```
+
+而反面样例会按预期失败：
+
+```bash
+python scripts/seo_audit.py tests/fixtures/bad-page.html
+# → [FAIL] headings / image-alt / canvas-text ... 整体结论：[FAIL]，退出码 1
 ```
 
 ---
