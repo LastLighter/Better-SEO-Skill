@@ -1,0 +1,38 @@
+name: tests
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  audit-selftest:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.8", "3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Run regression tests
+        run: python tests/run_tests.py
+
+      - name: Audit the good template (expect exit 0)
+        run: python scripts/seo_audit.py assets/templates/head-and-structure.html -v
+
+      - name: Audit the bad fixture (expect exit 1)
+        run: |
+          set +e
+          python scripts/seo_audit.py tests/fixtures/bad-page.html --json > /tmp/bad.json
+          code=$?
+          cat /tmp/bad.json
+          if [ "$code" -ne 1 ]; then
+            echo "::error::expected exit code 1 for the bad fixture, got $code"
+            exit 1
+          fi

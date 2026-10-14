@@ -1,0 +1,122 @@
+<!doctype html>
+<!--
+  SEO 页面 Head 骨架模板
+  用法：复制到 Next.js app/layout.tsx 的 metadata 导出，或 index.html 的 <head> 中并替换占位内容。
+  占位符：{BRAND} {BRAND_EN} {LONGTAIL_1} {LONGTAIL_2} {DESCRIPTION} {CANONICAL} {OG_IMAGE}
+-->
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- 1. Title：{品牌} ({英文}) - {核心长尾词1} | {核心长尾词2} -->
+  <title>图飞 (Dreamifly) - 免费AI绘图与AI生图工具 | 无限制AI图像生成平台</title>
+
+  <!-- 2. Description：品牌名 + 痛点解决 + 核心功能 + 强 Action 引导，120-150 字 -->
+  <meta name="description"
+        content="图飞 (Dreamifly) 提供免费无限制 AI 绘图与 AI 生图，输入中文提示词即可一键生成二次元、摄影、概念设计作品。无需安装，立即免费开画出图。" />
+
+  <!-- 3. Canonical：带参数页需指向干净 URL -->
+  <link rel="canonical" href="https://example.com/" />
+
+  <!-- 4. Open Graph / Twitter -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="图飞 Dreamifly" />
+  <meta property="og:title" content="图飞 (Dreamifly) - 免费AI绘图与AI生图工具" />
+  <meta property="og:description" content="免费无限制 AI 生图，中文提示词直出，无需安装。" />
+  <meta property="og:image" content="https://example.com/og-cover.webp" />
+  <meta property="og:url" content="https://example.com/" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- 5. 首屏 LCP 图预加载（注意：LCP 图不要加 loading="lazy"） -->
+  <link rel="preload" as="image" href="/hero.webp" fetchpriority="high" />
+
+  <!-- 6. 结构化数据：服务端直接输出，不要用 JS 注入 -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "图飞 (Dreamifly)",
+    "operatingSystem": "Web",
+    "applicationCategory": "DesignApplication",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+</head>
+
+<body>
+  <header>
+    <!-- H1 全页唯一：品牌词 + 核心定位 -->
+    <h1>图飞 Dreamifly · 免费无限制 AI 生图</h1>
+  </header>
+
+  <main>
+    <!-- H2 = 核心功能区 / 场景分类 -->
+    <section aria-labelledby="why-dreamifly">
+      <h2 id="why-dreamifly">为什么选择图飞 Dreamifly AI 生图？</h2>
+      <h3>中文提示词直出</h3>
+      <h3>无限制免费出图</h3>
+    </section>
+
+    <!-- 主工作流：预设标签点击即填入 Prompt 并同步 URL 参数 -->
+    <section aria-labelledby="generator">
+      <h2 id="generator">免费 AI 绘图工作区</h2>
+      <form>
+        <textarea name="prompt" placeholder="描述你想要的画面，例如：雨中撑伞的二次元少女"></textarea>
+        <ul>
+          <li><button type="button" data-prompt="masterpiece, anime girl...">二次元 AI 生图</button></li>
+          <li><button type="button" data-prompt="sci-fi city, cyberpunk...">无限制概念设计</button></li>
+        </ul>
+        <button type="submit">立即免费生成</button>
+      </form>
+    </section>
+
+    <!-- 灵感广场：卡片 alt 带长尾词 + 显式宽高 + 懒加载 -->
+    <section aria-labelledby="gallery">
+      <h2 id="gallery">热门免费 AI 绘图灵感</h2>
+      <ul>
+        <li>
+          <a href="/gallery/anime-ai-generator/12345">
+            <img src="/gallery/anime-12345.webp"
+                 alt="图飞 二次元 AI 生图 生成效果：masterpiece, anime girl in rain"
+                 width="512" height="512" loading="lazy" decoding="async" />
+            <h3>"雨中的少女" - 图飞 二次元 AI 生图提示词与生成效果</h3>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- 教程引流 + CTA 闭环 -->
+    <section aria-labelledby="guide">
+      <h2 id="guide">新手指南</h2>
+      <article>
+        <h3>如何实现无限制 AI 生图？</h3>
+        <pre><code>masterpiece, cinematic lighting, ultra detailed</code></pre>
+        <a href="/?prompt=masterpiece%2C%20cinematic%20lighting&amp;model=concept-xl">
+          一键复制并生成
+        </a>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <!-- Footer 索引矩阵：锚文本用长尾词本身，服务端可爬 -->
+    <nav aria-label="站点索引">
+      <section>
+        <h2>核心功能</h2>
+        <ul>
+          <li><a href="/">图飞 Dreamifly 免费 AI 生图</a></li>
+          <li><a href="/tools/ai-drawing">AI 绘图工具</a></li>
+        </ul>
+      </section>
+      <section>
+        <h2>热门长尾场景</h2>
+        <ul>
+          <li><a href="/s/free-anime-generator">二次元 AI 生图</a></li>
+          <li><a href="/s/free-sticker-generator">免费 AI 贴图生成</a></li>
+        </ul>
+      </section>
+    </nav>
+  </footer>
+</body>
+</html>

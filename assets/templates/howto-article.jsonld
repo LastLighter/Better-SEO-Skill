@@ -1,0 +1,34 @@
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "如何实现无限制 AI 生图？",
+  "description": "用图飞 Dreamifly 在不安装任何软件的情况下生成无限制的 AI 图像，包含完整提示词与参数设置。",
+  "inLanguage": "zh-CN",
+  "totalTime": "PT2M",
+  "tool": [
+    { "@type": "HowToTool", "name": "图飞 Dreamifly 网页版（无需安装）" }
+  ],
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "name": "打开主生图页",
+      "text": "访问图飞 Dreamifly 首页，无需注册即可进入 AI 生图工作区。",
+      "url": "https://example.com/#how-to"
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "name": "填入提示词或点击风格预设",
+      "text": "在输入框中粘贴提示词，或直接点击「无限制概念设计」预设标签一键填入。",
+      "url": "https://example.com/#how-to"
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "name": "选择模型与比例并生成",
+      "text": "选择对应模型与画幅比例，点击生成按钮，等待数秒即可获得结果。",
+      "url": "https://example.com/#how-to"
+    }
+  ]
+}

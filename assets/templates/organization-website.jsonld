@@ -1,0 +1,32 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://example.com/#organization",
+      "name": "图飞 Dreamifly",
+      "url": "https://example.com/",
+      "logo": "https://example.com/logo.webp",
+      "sameAs": [
+        "https://x.com/dreamifly",
+        "https://github.com/LastLighter/Better-SEO-Skill"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://example.com/#website",
+      "url": "https://example.com/",
+      "name": "图飞 Dreamifly - 免费 AI 绘图与 AI 生图工具",
+      "publisher": { "@id": "https://example.com/#organization" },
+      "inLanguage": "zh-CN",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://example.com/gallery?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+  ]
+}

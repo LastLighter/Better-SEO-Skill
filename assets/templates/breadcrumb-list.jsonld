@@ -1,0 +1,24 @@
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "图飞 Dreamifly 首页",
+      "item": "https://example.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "AI 生图工具",
+      "item": "https://example.com/tools/ai-drawing"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "免费 AI 贴图生成",
+      "item": "https://example.com/s/free-sticker-generator"
+    }
+  ]
+}
