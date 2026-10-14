@@ -1,6 +1,6 @@
 ---
 name: better-seo-workflow
-description: SEO 页面内容与工作流优化指南。在生成前端组件、设计页面结构、撰写落地页/灵感广场内容、配置 Title/Meta/JSON-LD 或优化用户交互工作流时使用；也用于产品页、工具页、帮助中心/博客、程序化落地页的 SEO 代码评审。提供 Title/Description/Heading 模板、Schema.org 结构化数据、长尾词融入工作流的 4 大模式、技术性与可读性 Hard Rules、交付前 CheckList，以及可直接运行的 seo_audit.py 自动化审计脚本。
+description: SEO 页面内容与工作流优化指南（SEO Page & Workflow Optimization）。当用户要求做 SEO 优化、写落地页/灵感广场内容、生成前端组件与页面结构、配置 Title/Description/OG/JSON-LD 结构化数据、设计长尾词标签与一键同款交互、或对产品页/工具页/帮助中心做 SEO 代码评审时使用。提供 Title/Description/Heading 模板、Schema.org 结构化数据、长尾词融入工作流的 4 大模式、技术性与可读性 Hard Rules、交付前 CheckList，以及零依赖的 seo_audit.py 自动化审计脚本（输出 PASS/WARN/FAIL）。触发词：SEO、长尾词、落地页、Meta、Title、H1、alt、Schema、结构化数据、JSON-LD、关键词、爬虫、富文本摘要。
 license: MIT
 ---
 
